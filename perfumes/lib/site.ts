@@ -1,19 +1,19 @@
 // Todo o conteúdo editável do site fica aqui. Procure por TODO antes de publicar.
 
 export const site = {
-  name: "Âmbar",
-  fullName: "Âmbar Perfumaria",
+  name: "Lorvè",
+  fullName: "Lorvè",
   tagline: "Perfumaria árabe, nicho e importados",
-  title: "Âmbar Perfumaria · Perfumes árabes, nicho e importados",
+  title: "Lorvè · Perfumes árabes, nicho e importados",
   description:
     "Mais de 490 fragrâncias de Lattafa, Armaf, Maison Alhambra, Afnan, Xerjoff e outras casas. Monte sua sacola e finalize o pedido pelo WhatsApp.",
   // TODO: domínio definitivo (SEO, sitemap e prévia de links)
-  url: "https://ambarperfumaria.com.br",
+  url: "https://lorve.com.br",
   // TODO: número real com DDI + DDD, só dígitos (ex.: 5511912345678)
   whatsapp: "5500000000000",
   // TODO: perfil oficial
-  instagram: "https://instagram.com/ambarperfumaria",
-  instagramHandle: "@ambarperfumaria",
+  instagram: "https://instagram.com/lorve",
+  instagramHandle: "@lorve",
 
   // Preços: a lista do fornecedor vem em dólar, sem IVA.
   currency: "USD",

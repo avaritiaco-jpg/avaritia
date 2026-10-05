@@ -20,7 +20,7 @@ export function Intro() {
       return;
     }
     try {
-      sessionStorage.setItem("ambar:intro", "1");
+      sessionStorage.setItem("lorve:intro", "1");
     } catch {}
 
     let unlock: (() => void) | undefined;

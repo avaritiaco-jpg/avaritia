@@ -39,7 +39,7 @@ export function useStore<T, S>(store: Store<T>, selector: (s: T) => S): S {
 export type Line = { code: string; qty: number };
 
 export const cart = createStore<Line[]>([]);
-const CART_KEY = "ambar:sacola";
+const CART_KEY = "lorve:sacola";
 
 let cartLoaded = false;
 

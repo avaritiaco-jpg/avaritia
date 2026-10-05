@@ -66,7 +66,7 @@ const jsonLd = {
 
 // A abertura aparece uma vez por sessão e nunca com "reduzir movimento".
 // Decidido antes da primeira pintura para não piscar.
-const introScript = `try{var d=document.documentElement;if(sessionStorage.getItem("ambar:intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.dataset.intro="skip"}catch(e){document.documentElement.dataset.intro="skip"}`;
+const introScript = `try{var d=document.documentElement;if(sessionStorage.getItem("lorve:intro")||matchMedia("(prefers-reduced-motion: reduce)").matches)d.dataset.intro="skip"}catch(e){document.documentElement.dataset.intro="skip"}`;
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (

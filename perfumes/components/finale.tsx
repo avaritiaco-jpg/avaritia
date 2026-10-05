@@ -179,12 +179,14 @@ export function Footer() {
 
       <div
         aria-hidden
-        className="mt-16 flex select-none justify-center overflow-hidden px-2 pr-[0.1em] pt-[0.2em] font-display text-[clamp(7rem,30vw,26rem)] font-light italic leading-[0.8]"
+        className="mt-12 flex select-none justify-center overflow-hidden px-2 pt-[0.4em] font-display text-[clamp(7rem,30vw,26rem)] font-light italic leading-[0.8]"
       >
         {letters.map((l, i) => (
           <motion.span
             key={i}
-            className="text-gold tracking-[-0.02em]"
+            // o gradiente do texto só pinta dentro da caixa da letra: o respiro (compensado pela margem negativa)
+            // deixa o acento do "è" e o rabo do itálico dentro dela
+            className="text-gold -mx-[0.08em] -mt-[0.35em] px-[0.08em] pt-[0.35em] tracking-[-0.02em]"
             initial={{ transform: "translateY(60%)", opacity: 0 }}
             whileInView={{ transform: "translateY(0%)", opacity: 1 }}
             viewport={{ once: true, amount: 0.3 }}

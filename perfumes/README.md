@@ -1,4 +1,4 @@
-# Âmbar Perfumaria
+# Lorvè
 
 Catálogo online de perfumes árabes, nicho e importados, montado a partir da lista de preços do fornecedor (`LISTA DE PERFUMES Y COSMETICOS 15-06.pdf`): **496 produtos de 20 marcas**, cada um com foto, código, preço, concentração, tamanho e gênero.
 
@@ -40,8 +40,8 @@ npm start        # serve a pasta ./out
 Abra **`lib/site.ts`** e procure por `TODO`:
 
 - [ ] `whatsapp`: número real com DDI + DDD, só dígitos (ex.: `5511912345678`). Hoje está `5500000000000`.
-- [ ] `name`, `fullName`, `instagram` e `instagramHandle`: "Âmbar" é um nome provisório.
-- [ ] `url`: domínio definitivo (SEO, sitemap e prévia de links).
+- [ ] `instagram` e `instagramHandle`: perfil oficial. Hoje estão `instagram.com/lorve` e `@lorve`, só de exemplo.
+- [ ] `url`: domínio definitivo (SEO, sitemap e prévia de links). Hoje está `https://lorve.com.br`, só de exemplo.
 - [ ] `priceMultiplier`: a lista vem com o preço do fornecedor. Use `1.3` para +30%, por exemplo. Todos os preços do site mudam juntos.
 - [ ] `priceNote` e `faq`: revise moeda, frete, pagamento e prazos conforme a política comercial.
 
