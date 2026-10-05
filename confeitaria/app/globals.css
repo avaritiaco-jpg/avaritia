@@ -1,0 +1,185 @@
+@import "tailwindcss";
+
+/*
+ * Cianinha: as cores do cardápio impresso. Rosa antigo, marrom-cacau da letra cursiva
+ * e o dourado do batedor, sobre um fundo rosado bem claro.
+ * Raios: cards 1.75rem com núcleo concêntrico, botões, chips e campos em pílula.
+ */
+@theme {
+  --color-blush: #fbf3f1;
+  --color-blush-2: #f6e8e5;
+  --color-blush-3: #efdad6;
+  --color-card: #fffaf9;
+  --color-rose: #d9a3a7;
+  --color-rose-soft: #f0d3d4;
+  --color-rose-deep: #a14f5c;
+  --color-rose-ink: #8a3f4b;
+  --color-cocoa: #3d2720;
+  --color-cocoa-2: #5f4438;
+  --color-mute: #7c645a;
+  --color-line: rgb(61 39 32 / 0.1);
+  --color-line-strong: rgb(61 39 32 / 0.18);
+  --color-gold: #c9a24f;
+  --color-gold-soft: #e7cf94;
+  --color-success: #3f7a4f;
+  --color-danger: #b3261e;
+
+  --font-script: var(--font-satisfy), "Satisfy", cursive;
+  --font-sans: var(--font-quicksand), ui-rounded, system-ui, sans-serif;
+
+  /* Curvas fortes (as nativas são fracas demais para UI) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-float: float 6s cubic-bezier(0.77, 0, 0.175, 1) infinite alternate;
+  --animate-float-slow: float 8s cubic-bezier(0.77, 0, 0.175, 1) infinite alternate;
+
+  @keyframes float {
+    from {
+      transform: translate3d(0, -8px, 0) rotate(-2deg);
+    }
+    to {
+      transform: translate3d(0, 8px, 0) rotate(2deg);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: light;
+  }
+
+  html {
+    background: var(--color-blush);
+    color: var(--color-cocoa);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background: var(--color-blush);
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-rose-soft);
+    color: var(--color-cocoa);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-rose-deep);
+    outline-offset: 3px;
+    border-radius: 10px;
+  }
+}
+
+@layer components {
+  /* Granulação: um único elemento fixo, sem custo de repaint no scroll */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    pointer-events: none;
+    opacity: 0.035;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Prato rosado onde as ilustrações ficam */
+  .plate {
+    background: radial-gradient(110% 90% at 50% 18%, #fffdfc 0%, #f9ebe8 55%, #f1dcd8 100%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .text-pretty {
+    text-wrap: pretty;
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(90deg, transparent, #000 8%, #000 92%, transparent);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Controle deslizante do guia de tamanhos */
+  .range {
+    appearance: none;
+    height: 32px;
+    background: transparent;
+    cursor: pointer;
+    touch-action: pan-y;
+  }
+  .range::-webkit-slider-runnable-track {
+    height: 8px;
+    border-radius: 999px;
+    background: linear-gradient(90deg, var(--color-rose-deep) var(--pct), var(--color-blush-3) var(--pct));
+  }
+  .range::-moz-range-track {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-blush-3);
+  }
+  .range::-moz-range-progress {
+    height: 8px;
+    border-radius: 999px;
+    background: var(--color-rose-deep);
+  }
+  .range::-webkit-slider-thumb {
+    appearance: none;
+    width: 30px;
+    height: 30px;
+    margin-top: -11px;
+    border-radius: 999px;
+    background: #fff;
+    border: 3px solid var(--color-rose-deep);
+    box-shadow: 0 6px 16px -6px rgb(122 63 70 / 0.55);
+    transition: transform 160ms var(--ease-out);
+  }
+  .range::-moz-range-thumb {
+    width: 24px;
+    height: 24px;
+    border-radius: 999px;
+    background: #fff;
+    border: 3px solid var(--color-rose-deep);
+    box-shadow: 0 6px 16px -6px rgb(122 63 70 / 0.55);
+    transition: transform 160ms var(--ease-out);
+  }
+  .range:active::-webkit-slider-thumb {
+    transform: scale(1.12);
+  }
+  .range:active::-moz-range-thumb {
+    transform: scale(1.12);
+  }
+
+  /* Valores com algarismos de mesma largura (não "pulam" ao mudar) */
+  .nums {
+    font-variant-numeric: tabular-nums;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-float-slow {
+    animation: none;
+  }
+}
+
+/* Barra de progresso do sabor em destaque no topo */
+@keyframes flavor-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

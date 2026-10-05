@@ -61,3 +61,4 @@ O formulário de contato não precisa de backend: ele valida os campos e abre o 
 ## Outros projetos neste repositório
 
 - **[`perfumes/`](perfumes/README.md)**: Lorvè, catálogo de 496 perfumes gerado a partir da lista do fornecedor em PDF, sem preços, com sacola e consulta pelo WhatsApp. É um projeto Next.js independente: rode os comandos de dentro da pasta `perfumes/`.
+- **[`confeitaria/`](confeitaria/README.md)**: Cianinha Confeitaria, cardápio 2026 com bolos, bolo gelado, docinhos e caseirinhos, carrinho e página de pagamento (sinal de 50% por Pix com QR Code, PicPay ou dinheiro, e pedido enviado pelo WhatsApp). Também é um projeto Next.js independente: rode os comandos de dentro da pasta `confeitaria/`.
