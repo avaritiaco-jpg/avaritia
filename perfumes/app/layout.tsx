@@ -61,7 +61,6 @@ const jsonLd = {
   description: site.description,
   url: site.url,
   sameAs: [site.instagram],
-  currenciesAccepted: site.currency,
 };
 
 // A abertura aparece uma vez por sessão e nunca com "reduzir movimento".

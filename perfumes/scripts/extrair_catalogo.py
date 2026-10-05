@@ -1,14 +1,15 @@
 """
-Gera o catálogo do site a partir da lista de preços em PDF.
+Gera o catálogo do site a partir da lista do fornecedor em PDF.
 
     pip install pymupdf pillow
     python scripts/extrair_catalogo.py caminho/para/LISTA.pdf
 
 Saída:
-    lib/catalogo.json        produtos (código, marca, nome, preço, imagem...)
+    lib/catalogo.json        produtos (código, marca, nome, tamanho, imagem...), sem preços
     public/produtos/*.webp   uma foto por produto, recortada do PDF
 
-Rode de novo sempre que chegar uma lista nova: os produtos e preços são substituídos.
+Os preços da lista ficam de fora de propósito: o site mostra só o catálogo e leva a
+consulta de valores para o WhatsApp. Rode de novo sempre que chegar uma lista nova.
 """
 
 import json
@@ -263,7 +264,7 @@ def main(pdf_path: str):
         for w in words:
             x0, y0, x1, y1, t = w[:5]
             if x1 < 100 and CODE_RE.match(t):
-                rows.append(dict(code=t, yc=(y0 + y1) / 2, desc=[], price=None, rects=[]))
+                rows.append(dict(code=t, yc=(y0 + y1) / 2, desc=[], rects=[]))
         rows.sort(key=lambda r: r["yc"])
 
         def nearest(y, tol):
@@ -279,10 +280,6 @@ def main(pdf_path: str):
                 r = nearest(yc, 30)
                 if r:
                     r["desc"].append((round(yc), x0, t))
-            elif x0 > 480 and re.match(r"^[\d.,]+$", t):
-                r = nearest(yc, 30)
-                if r:
-                    r["price"] = float(t.replace(",", ""))
 
         for info in page.get_image_info():
             x0, y0, x1, y1 = info["bbox"]
@@ -321,7 +318,6 @@ def main(pdf_path: str):
                 dict(
                     code=v["code"],
                     brand=BRANDS.get(brand, title(brand or "")),
-                    price=v["price"],
                     image=image,
                     tone=tone,
                     cutout=cutout,

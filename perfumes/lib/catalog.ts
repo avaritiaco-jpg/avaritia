@@ -8,7 +8,6 @@ export type Product = {
   code: string;
   brand: string;
   name: string;
-  price: number;
   image: string | null;
   /** cor dominante da foto, usada no brilho do card */
   tone: string;
@@ -40,15 +39,6 @@ export const genders: { id: Gender | "todos"; label: string }[] = [
   { id: "unissex", label: "Unissex" },
 ];
 
-export const priceRanges = [
-  { id: "todos", label: "Qualquer preço", min: 0, max: Infinity },
-  { id: "ate-15", label: "Até US$ 15", min: 0, max: 15 },
-  { id: "15-30", label: "US$ 15 a 30", min: 15, max: 30 },
-  { id: "30-60", label: "US$ 30 a 60", min: 30, max: 60 },
-  { id: "60+", label: "Acima de US$ 60", min: 60, max: Infinity },
-] as const;
-export type PriceRangeId = (typeof priceRanges)[number]["id"];
-
 export const concentrations = [
   { id: "todas", label: "Toda concentração", match: () => true },
   {
@@ -63,8 +53,6 @@ export type ConcentrationId = (typeof concentrations)[number]["id"];
 
 export const sorts = [
   { id: "relevancia", label: "Destaques" },
-  { id: "menor-preco", label: "Menor preço" },
-  { id: "maior-preco", label: "Maior preço" },
   { id: "nome", label: "Nome (A–Z)" },
 ] as const;
 export type SortId = (typeof sorts)[number]["id"];
@@ -100,15 +88,6 @@ const shortNames: Record<string, string> = {
 };
 export const shortConcentration = (c: string | null) => (c ? (shortNames[c] ?? c) : null);
 
-export function finalPrice(p: Pick<Product, "price">) {
-  return Math.round(p.price * site.priceMultiplier * 100) / 100;
-}
-
-const money = new Intl.NumberFormat("pt-BR", { style: "currency", currency: site.currency });
-export const formatPrice = (value: number) => money.format(value);
-
-export const minPrice = Math.min(...products.map(finalPrice));
-
 /** Texto sem acentos e em minúsculas, para a busca */
 export function normalize(s: string) {
   return s
@@ -131,7 +110,6 @@ export type Filters = {
   category: Category | "todos";
   gender: Gender | "todos";
   brand: string;
-  price: PriceRangeId;
   concentration: ConcentrationId;
   sort: SortId;
 };
@@ -141,7 +119,6 @@ export const defaultFilters: Filters = {
   category: "todos",
   gender: "todos",
   brand: "todas",
-  price: "todos",
   concentration: "todas",
   sort: "relevancia",
 };
@@ -150,7 +127,6 @@ const featuredRank = new Map<string, number>(site.featured.map((f, i) => [f.code
 
 export function filterProducts(f: Filters) {
   const terms = normalize(f.query).split(/\s+/).filter(Boolean);
-  const range = priceRanges.find((r) => r.id === f.price) ?? priceRanges[0];
   const level = concentrations.find((c) => c.id === f.concentration) ?? concentrations[0];
 
   const list = products.filter((p) => {
@@ -158,8 +134,6 @@ export function filterProducts(f: Filters) {
     if (f.gender !== "todos" && p.gender !== f.gender) return false;
     if (f.brand !== "todas" && p.brand !== f.brand) return false;
     if (!level.match(p.concentration)) return false;
-    const price = finalPrice(p);
-    if (price < range.min || price >= range.max) return false;
     if (terms.length) {
       const hay = searchIndex.get(p.code) ?? "";
       return terms.every((t) => hay.includes(t));
@@ -168,10 +142,6 @@ export function filterProducts(f: Filters) {
   });
 
   switch (f.sort) {
-    case "menor-preco":
-      return list.sort((a, b) => a.price - b.price);
-    case "maior-preco":
-      return list.sort((a, b) => b.price - a.price);
     case "nome":
       return list.sort((a, b) => a.name.localeCompare(b.name, "pt-BR"));
     default:
@@ -200,8 +170,8 @@ export function related(p: Product, limit = 4) {
         (o.brand === p.brand ? 4 : 0) +
         (normalize(o.name).startsWith(line) ? 3 : 0) +
         (o.gender === p.gender ? 2 : 0) +
-        (o.cutout ? 1 : 0) -
-        Math.abs(o.price - p.price) / 40,
+        (o.cutout ? 1 : 0) +
+        (o.size === p.size ? 1 : 0),
     }))
     .sort((a, b) => b.s - a.s)
     .slice(0, limit)

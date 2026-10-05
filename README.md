@@ -60,4 +60,4 @@ O formulário de contato não precisa de backend: ele valida os campos e abre o 
 
 ## Outros projetos neste repositório
 
-- **[`perfumes/`](perfumes/README.md)**: Lorvè, catálogo de 496 perfumes gerado a partir da lista de preços em PDF, com sacola e pedido pelo WhatsApp. É um projeto Next.js independente: rode os comandos de dentro da pasta `perfumes/`.
+- **[`perfumes/`](perfumes/README.md)**: Lorvè, catálogo de 496 perfumes gerado a partir da lista do fornecedor em PDF, sem preços, com sacola e consulta pelo WhatsApp. É um projeto Next.js independente: rode os comandos de dentro da pasta `perfumes/`.

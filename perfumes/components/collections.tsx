@@ -2,7 +2,7 @@
 
 import { ArrowUpRight } from "@phosphor-icons/react/dist/ssr";
 import { motion, useReducedMotion } from "motion/react";
-import { formatPrice, finalPrice, getProduct, products, type Filters, type Product } from "@/lib/catalog";
+import { getProduct, products, type Filters, type Product } from "@/lib/catalog";
 import { setFilters, resetFilters } from "@/lib/store";
 import { scrollToId } from "@/lib/scroll";
 import { EASE_OUT, Eyebrow, gentle, ProductImage, SplitReveal } from "./ui";
@@ -17,12 +17,11 @@ type Tile = {
 };
 
 const count = (fn: (p: Product) => boolean) => products.filter(fn).length;
-const from = (fn: (p: Product) => boolean) => formatPrice(Math.min(...products.filter(fn).map(finalPrice)));
 
 const tiles: Tile[] = [
   {
     title: "Perfumes",
-    kicker: `${count((p) => p.category === "perfume")} fragrâncias · a partir de ${from((p) => p.category === "perfume")}`,
+    kicker: `${count((p) => p.category === "perfume")} fragrâncias`,
     codes: ["7962-4", "7239-7", "9885-4"],
     filter: { category: "perfume" },
     className: "md:col-span-7 md:row-span-2",
@@ -38,7 +37,7 @@ const tiles: Tile[] = [
   },
   {
     title: "Body splash & mists",
-    kicker: `${count((p) => p.category === "body")} opções · a partir de ${from((p) => p.category === "body")}`,
+    kicker: `${count((p) => p.category === "body")} opções para o corpo e o cabelo`,
     codes: ["9214-2", "9220-3", "9221-0"],
     filter: { category: "body" },
     className: "md:col-span-5",
@@ -62,7 +61,7 @@ const tiles: Tile[] = [
   },
   {
     title: "Linha Promo",
-    kicker: `${count((p) => p.brand === "Linha Promo")} achados por ${from((p) => p.brand === "Linha Promo")}`,
+    kicker: `${count((p) => p.brand === "Linha Promo")} fragrâncias`,
     codes: ["7909-9", "7893-1", "7916-7"],
     filter: { brand: "Linha Promo" },
     className: "md:col-span-4",

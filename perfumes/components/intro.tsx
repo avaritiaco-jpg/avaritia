@@ -4,7 +4,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { useEffect, useState } from "react";
 import { finishIntro } from "@/lib/store";
 import { lockScroll } from "@/lib/scroll";
-import { products } from "@/lib/catalog";
+import { brands, products } from "@/lib/catalog";
 import { site } from "@/lib/site";
 import { EASE_IN_OUT, EASE_OUT } from "./ui";
 
@@ -79,7 +79,7 @@ export function Intro() {
               animate={{ opacity: 1 }}
               transition={{ duration: 0.8, delay: 0.9, ease: EASE_OUT }}
             >
-              {products.length} fragrâncias · lista {site.listDate}
+              {products.length} fragrâncias · {brands.length} casas
             </motion.p>
           </motion.div>
         </motion.div>

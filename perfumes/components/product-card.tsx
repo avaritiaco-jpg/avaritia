@@ -2,7 +2,7 @@
 
 import { motion, useReducedMotion } from "motion/react";
 import { memo, useRef } from "react";
-import { finalPrice, formatPrice, genderLabel, shortConcentration, type Product } from "@/lib/catalog";
+import { genderLabel, shortConcentration, type Product } from "@/lib/catalog";
 import { openQuickView } from "@/lib/store";
 import { AddButton } from "./add-button";
 import { EASE_OUT, gentle, ProductImage } from "./ui";
@@ -62,25 +62,28 @@ export const ProductCard = memo(function ProductCard({ product, order }: { produ
               ) : null}
             </div>
           </button>
-          <AddButton
-            product={product}
-            sourceRef={plateRef}
-            className="absolute bottom-3 right-3 shadow-[0_10px_30px_-10px_rgba(0,0,0,0.6)] pointer-fine:translate-y-2 pointer-fine:opacity-0 pointer-fine:group-hover:translate-y-0 pointer-fine:group-hover:opacity-100 pointer-fine:group-focus-within:translate-y-0 pointer-fine:group-focus-within:opacity-100"
-          />
         </div>
 
-        <button type="button" onClick={open} className="block w-full px-3 pb-3 pt-4 text-left" tabIndex={-1}>
-          <p className="truncate text-[10px] uppercase tracking-[0.22em] text-amber-soft/90">{product.brand}</p>
-          <h3 className="mt-1.5 line-clamp-2 min-h-[2.2em] font-display text-[1.35rem] leading-[1.1] text-ivory">
-            {product.name}
-          </h3>
-          <div className="mt-2 flex items-end justify-between gap-2">
-            <p className="truncate text-[11px] text-faint">
+        <div className="px-3 pb-2 pt-4">
+          <button type="button" onClick={open} className="block w-full text-left" tabIndex={-1}>
+            <p className="truncate text-[10px] uppercase tracking-[0.22em] text-amber-soft/90">{product.brand}</p>
+            <h3 className="mt-1.5 line-clamp-2 min-h-[2.2em] font-display text-[1.35rem] leading-[1.1] text-ivory">
+              {product.name}
+            </h3>
+          </button>
+          {/* sem preço: o botão de adicionar à sacola é a ação principal do card */}
+          <div className="mt-2 flex items-center justify-between gap-2">
+            <button
+              type="button"
+              onClick={open}
+              tabIndex={-1}
+              className="min-w-0 flex-1 truncate text-left text-[11px] text-faint"
+            >
               {[shortConcentration(product.concentration), product.size].filter(Boolean).join(" · ")}
-            </p>
-            <p className="shrink-0 font-mono text-sm text-ivory">{formatPrice(finalPrice(product))}</p>
+            </button>
+            <AddButton product={product} sourceRef={plateRef} className="shrink-0" />
           </div>
-        </button>
+        </div>
       </div>
     </motion.article>
   );

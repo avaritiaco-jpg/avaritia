@@ -12,15 +12,13 @@ import { useEffect, useLayoutEffect, useRef, useState } from "react";
 import { Handbag, Minus, Plus, WhatsappLogo, X } from "@phosphor-icons/react/dist/ssr";
 import {
   categoryLabel,
-  finalPrice,
-  formatPrice,
   genderLabel,
   getProduct,
   productTitle,
   related,
   type Product,
 } from "@/lib/catalog";
-import { site, whatsappLink } from "@/lib/site";
+import { whatsappLink } from "@/lib/site";
 import { closeQuickView, openDrawer, openQuickView, ui, useStore } from "@/lib/store";
 import { useMedia } from "@/lib/use-media";
 import { add } from "./add-button";
@@ -67,10 +65,12 @@ function Details({ product }: { product: Product }) {
         </div>
       </div>
 
-      <div className="flex items-end justify-between gap-4 border-y border-line py-5">
-        <div>
-          <p className="font-display text-5xl font-light text-ivory">{formatPrice(finalPrice(product))}</p>
-          <p className="mt-1 text-xs text-faint">{site.priceNote}</p>
+      <div className="flex items-center justify-between gap-4 border-y border-line py-5">
+        <div className="min-w-0">
+          <p className="font-display text-3xl font-light leading-none text-ivory">Valor sob consulta</p>
+          <p className="mt-2 text-xs leading-relaxed text-faint">
+            Passamos o preço e confirmamos a disponibilidade pelo WhatsApp.
+          </p>
         </div>
         <div className="flex items-center rounded-full bg-white/[0.04] p-1 ring-1 ring-line" aria-label="Quantidade">
           <button
@@ -140,14 +140,14 @@ function Details({ product }: { product: Product }) {
 
       <a
         href={whatsappLink(
-          `Olá! Tenho interesse em ${qty}× ${productTitle(product)} (cód. ${product.code}), ${formatPrice(finalPrice(product))}. Está disponível?`,
+          `Olá! Tenho interesse em ${qty}× ${productTitle(product)} (cód. ${product.code}). Pode me passar o valor e a disponibilidade?`,
         )}
         target="_blank"
         rel="noopener noreferrer"
         className="-mt-2 inline-flex items-center gap-2 self-start text-sm text-mute transition-colors hover:text-ivory"
       >
         <WhatsappLogo size={18} weight="light" />
-        Perguntar sobre este no WhatsApp
+        Consultar este no WhatsApp
       </a>
 
       {suggestions.length > 0 && (

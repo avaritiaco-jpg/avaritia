@@ -171,7 +171,7 @@ export function Footer() {
               </a>
             </li>
             <li className="text-xs text-faint">
-              Lista de preços de {site.listDate}. {site.priceNote}
+              Valores e disponibilidade sob consulta no WhatsApp.
             </li>
           </ul>
         </div>

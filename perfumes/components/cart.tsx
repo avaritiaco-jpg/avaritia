@@ -3,7 +3,7 @@
 import { AnimatePresence, animate, motion, useMotionValue, useReducedMotion, useTransform } from "motion/react";
 import { useEffect, useLayoutEffect, useState } from "react";
 import { Handbag, Minus, Plus, Trash, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
-import { finalPrice, formatPrice, getProduct, productTitle, type Product } from "@/lib/catalog";
+import { getProduct, productTitle, type Product } from "@/lib/catalog";
 import { site, whatsappLink } from "@/lib/site";
 import {
   cart,
@@ -29,18 +29,12 @@ type Row = Line & { product: Product };
 const rowsOf = (lines: Line[]) =>
   lines.map((l) => ({ ...l, product: getProduct(l.code) })).filter((r): r is Row => Boolean(r.product));
 
-const totalOf = (rows: Row[]) => rows.reduce((sum, r) => sum + finalPrice(r.product) * r.qty, 0);
-
 function orderMessage(rows: Row[]) {
-  const lines = rows.map(
-    (r) => `• ${r.qty}× ${productTitle(r.product)} · cód. ${r.code} · ${formatPrice(finalPrice(r.product) * r.qty)}`,
-  );
+  const lines = rows.map((r) => `• ${r.qty}× ${productTitle(r.product)} (cód. ${r.code})`);
   return [
-    `Olá! Quero fazer este pedido pelo site da ${site.fullName}:`,
+    `Olá! Vim pelo site da ${site.fullName} e quero consultar o valor e a disponibilidade destes itens:`,
     "",
     ...lines,
-    "",
-    `Total: ${formatPrice(totalOf(rows))} (${site.priceNote.replace(/\.$/, "").toLowerCase()})`,
   ].join("\n");
 }
 
@@ -51,7 +45,6 @@ export function CartDrawer() {
   const lines = useStore(cart, (s) => s);
   const rows = rowsOf(lines);
   const count = selectCount(lines);
-  const total = totalOf(rows);
 
   return (
     <Drawer
@@ -62,11 +55,9 @@ export function CartDrawer() {
       footer={
         rows.length ? (
           <div className="flex flex-col gap-4">
-            <div className="flex items-end justify-between">
-              <span className="text-sm text-mute">Total</span>
-              <span className="font-display text-4xl font-light text-ivory">{formatPrice(total)}</span>
-            </div>
-            <p className="-mt-2 text-right text-[11px] text-faint">{site.priceNote}</p>
+            <p className="text-center text-xs leading-relaxed text-faint">
+              Os valores e a disponibilidade são confirmados na conversa.
+            </p>
             <PillButton
               href={whatsappLink(orderMessage(rows))}
               target="_blank"
@@ -74,7 +65,7 @@ export function CartDrawer() {
               icon={<WhatsappLogo size={18} weight="regular" />}
               className="w-full justify-between"
             >
-              Finalizar pelo WhatsApp
+              Consultar pelo WhatsApp
             </PillButton>
             <button
               type="button"
@@ -94,7 +85,7 @@ export function CartDrawer() {
           </span>
           <p className="font-display text-3xl font-light text-ivory">Nada aqui ainda.</p>
           <p className="max-w-[28ch] text-sm text-mute">
-            Toque no + de qualquer fragrância para adicionar. Quando terminar, é só enviar pelo WhatsApp.
+            Toque no + de qualquer fragrância para adicionar. Quando terminar, é só consultar pelo WhatsApp.
           </p>
           <PillButton
             variant="ghost"
@@ -151,19 +142,14 @@ export function CartDrawer() {
                           <Plus size={12} />
                         </button>
                       </div>
-                      <div className="flex items-center gap-1">
-                        <span className="font-mono text-sm text-ivory">
-                          {formatPrice(finalPrice(r.product) * r.qty)}
-                        </span>
-                        <button
-                          type="button"
-                          onClick={() => removeFromCart(r.code)}
-                          aria-label={`Remover ${r.product.name}`}
-                          className="flex size-8 items-center justify-center rounded-full text-faint transition-colors hover:text-ivory"
-                        >
-                          <Trash size={14} weight="light" />
-                        </button>
-                      </div>
+                      <button
+                        type="button"
+                        onClick={() => removeFromCart(r.code)}
+                        aria-label={`Remover ${r.product.name}`}
+                        className="flex size-8 items-center justify-center rounded-full text-faint transition-colors hover:text-ivory"
+                      >
+                        <Trash size={14} weight="light" />
+                      </button>
                     </div>
                   </div>
                 </div>
@@ -255,7 +241,6 @@ export function MobileBagBar() {
   const drawer = useStore(ui, (s) => s.drawer);
   const quickView = useStore(ui, (s) => s.quickView);
   const count = selectCount(lines);
-  const total = totalOf(rowsOf(lines));
   const show = count > 0 && !drawer && !quickView;
 
   return (
@@ -273,11 +258,8 @@ export function MobileBagBar() {
           <span className="font-medium">
             Sacola · {count} {count === 1 ? "item" : "itens"}
           </span>
-          <span className="flex items-center gap-3">
-            <span className="font-mono text-sm">{formatPrice(total)}</span>
-            <span className="flex size-10 items-center justify-center rounded-full bg-noir text-ivory">
-              <Handbag size={17} />
-            </span>
+          <span className="flex size-10 items-center justify-center rounded-full bg-noir text-ivory">
+            <Handbag size={17} />
           </span>
         </motion.button>
       )}

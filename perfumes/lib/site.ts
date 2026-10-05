@@ -6,21 +6,14 @@ export const site = {
   tagline: "Perfumaria árabe, nicho e importados",
   title: "Lorvè · Perfumes árabes, nicho e importados",
   description:
-    "Mais de 490 fragrâncias de Lattafa, Armaf, Maison Alhambra, Afnan, Xerjoff e outras casas. Monte sua sacola e finalize o pedido pelo WhatsApp.",
+    "Mais de 490 fragrâncias de Lattafa, Armaf, Maison Alhambra, Afnan, Xerjoff e outras casas. Monte sua sacola e consulte valores e disponibilidade pelo WhatsApp.",
   // TODO: domínio definitivo (SEO, sitemap e prévia de links)
   url: "https://lorve.com.br",
-  // TODO: número real com DDI + DDD, só dígitos (ex.: 5511912345678)
-  whatsapp: "5500000000000",
+  // WhatsApp que recebe as consultas: DDI + DDD + número, só dígitos
+  whatsapp: "5522999225146",
   // TODO: perfil oficial
   instagram: "https://instagram.com/lorve",
   instagramHandle: "@lorve",
-
-  // Preços: a lista do fornecedor vem em dólar, sem IVA.
-  currency: "USD",
-  // Multiplicador aplicado a todos os preços da lista (1 = preço da lista; 1.3 = +30%).
-  priceMultiplier: 1,
-  priceNote: "Valores em dólar (US$), sem IVA de 10%.",
-  listDate: "15/06",
 
   nav: [
     { label: "Ícones", href: "#icones" },
@@ -48,35 +41,35 @@ export const site = {
   steps: [
     {
       title: "Escolha",
-      text: "Filtre por marca, família, gênero ou faixa de preço e abra cada fragrância para ver os detalhes.",
+      text: "Filtre por marca, categoria, gênero ou concentração e abra cada fragrância para ver os detalhes.",
     },
     {
       title: "Monte a sacola",
       text: "Adicione quantas unidades quiser. A sacola fica salva neste aparelho enquanto você navega.",
     },
     {
-      title: "Envie pelo WhatsApp",
-      text: "Um toque e o pedido chega pronto, com códigos, quantidades e total. Sem cadastro.",
+      title: "Consulte pelo WhatsApp",
+      text: "Um toque e a sua lista chega pronta, com códigos e quantidades. Sem cadastro.",
     },
     {
       title: "Receba",
-      text: "Confirmamos disponibilidade, pagamento e entrega na conversa, do jeito que for melhor pra você.",
+      text: "A gente responde com os valores e confirma disponibilidade, pagamento e entrega, do jeito que for melhor pra você.",
     },
   ],
 
   // TODO: revise conforme a política comercial (frete, pagamento, prazos)
   faq: [
     {
-      q: "Os preços estão em qual moeda?",
-      a: "Em dólar (US$), conforme a lista de preços vigente, sem IVA de 10%. O valor final é confirmado na conversa pelo WhatsApp.",
+      q: "Como sei o valor de cada produto?",
+      a: "Os valores são passados pelo WhatsApp. Monte a sacola com o que te interessa e toque em “Consultar pelo WhatsApp”: a mensagem já vai com os códigos e as quantidades, e a gente responde com o preço de cada item.",
     },
     {
       q: "Como faço o pedido?",
-      a: "Adicione os produtos à sacola e toque em “Finalizar pelo WhatsApp”. A mensagem já vai com os códigos, as quantidades e o total. É só enviar.",
+      a: "Adicione os produtos à sacola e toque em “Consultar pelo WhatsApp”. A mensagem já vai com os códigos e as quantidades. Depois é só combinar valores, pagamento e entrega na conversa.",
     },
     {
       q: "Todos os produtos estão disponíveis?",
-      a: "O catálogo segue a lista mais recente do fornecedor. Como o estoque gira rápido, confirmamos a disponibilidade de cada item antes de fechar o pedido.",
+      a: "Como o estoque gira rápido, confirmamos a disponibilidade de cada item na conversa, antes de fechar o pedido.",
     },
     {
       q: "Qual a diferença entre Extrait, Parfum, EDP e EDT?",

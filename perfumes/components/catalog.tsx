@@ -10,14 +10,12 @@ import {
   defaultFilters,
   filterProducts,
   genders,
-  priceRanges,
   products,
   sorts,
   type Filters,
 } from "@/lib/catalog";
 import { filters as filtersStore, resetFilters, setFilters, ui, useStore } from "@/lib/store";
 import { scrollToId } from "@/lib/scroll";
-import { site } from "@/lib/site";
 import { Drawer } from "./drawer";
 import { ProductCard } from "./product-card";
 import { EASE_DRAWER, EASE_OUT, Eyebrow, PillButton, SplitReveal } from "./ui";
@@ -145,13 +143,6 @@ function FilterPanel({ open, onClose, f, total }: { open: boolean; onClose: () =
           </Chip>
         ))}
       </Group>
-      <Group title="Faixa de preço">
-        {priceRanges.map((r) => (
-          <Chip key={r.id} active={f.price === r.id} onClick={() => setFilters({ price: r.id })}>
-            {r.label}
-          </Chip>
-        ))}
-      </Group>
       <Group title="Concentração">
         {concentrations.map((c) => (
           <Chip key={c.id} active={f.concentration === c.id} onClick={() => setFilters({ concentration: c.id })}>
@@ -180,7 +171,6 @@ function activeChips(f: Filters) {
   if (f.query) chips.push({ key: "query", label: `“${f.query}”` });
   if (f.brand !== "todas") chips.push({ key: "brand", label: f.brand });
   if (f.gender !== "todos") chips.push({ key: "gender", label: genders.find((g) => g.id === f.gender)!.label });
-  if (f.price !== "todos") chips.push({ key: "price", label: priceRanges.find((r) => r.id === f.price)!.label });
   if (f.concentration !== "todas")
     chips.push({ key: "concentration", label: concentrations.find((c) => c.id === f.concentration)!.label });
   return chips;
@@ -261,8 +251,7 @@ export function Catalog() {
           />
         </div>
         <p className="max-w-[38ch] text-base leading-relaxed text-mute">
-          {products.length} itens de {brands.length} casas, direto da lista de {site.listDate}. Busque pelo nome, pela
-          marca ou pelo código.
+          {products.length} itens de {brands.length} casas. Busque pelo nome, pela marca ou pelo código.
         </p>
       </div>
 

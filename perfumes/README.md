@@ -1,8 +1,10 @@
 # Lorvè
 
-Catálogo online de perfumes árabes, nicho e importados, montado a partir da lista de preços do fornecedor (`LISTA DE PERFUMES Y COSMETICOS 15-06.pdf`): **496 produtos de 20 marcas**, cada um com foto, código, preço, concentração, tamanho e gênero.
+Catálogo online de perfumes árabes, nicho e importados, montado a partir da lista do fornecedor (`LISTA DE PERFUMES Y COSMETICOS 15-06.pdf`): **496 produtos de 20 marcas**, cada um com foto, código, concentração, tamanho e gênero.
 
-O cliente monta a sacola no site e finaliza pelo **WhatsApp**: a mensagem já chega pronta, com códigos, quantidades e total. Não precisa de backend nem de banco de dados.
+**O site não mostra preços.** O cliente monta a sacola e toca em *Consultar pelo WhatsApp*: a mensagem já chega pronta, com códigos e quantidades, e os valores são passados na conversa. Não precisa de backend nem de banco de dados.
+
+Os preços da lista também ficam fora do código: o script de extração não os lê, então não vão para o `catalogo.json` nem para o JavaScript do site.
 
 ## O que tem no site
 
@@ -12,7 +14,7 @@ O cliente monta a sacola no site e finaliza pelo **WhatsApp**: a mensagem já ch
 - **Ícones da casa**: vitrine que rola na horizontal enquanto a página desce (no celular vira carrossel com encaixe).
 - **Coleções** em grade assimétrica, com os frascos abrindo em leque.
 - **Guia de concentração** com frascos que se enchem de líquido.
-- **Catálogo** com busca (sem acento, por nome, marca ou código), categorias, filtros (gênero, preço, concentração, marca), ordenação e carregamento contínuo.
+- **Catálogo** com busca (sem acento, por nome, marca ou código), categorias, filtros (gênero, concentração, marca), ordenação e carregamento contínuo.
 - **Ficha do produto**: a foto sai do card e cresce até o modal; no celular abre como gaveta que fecha arrastando. Cada produto tem link próprio (`?p=CODIGO`), bom para mandar no WhatsApp.
 - **Sacola** salva no aparelho; a foto do produto voa até o ícone da sacola ao adicionar.
 
@@ -37,17 +39,15 @@ npm start        # serve a pasta ./out
 
 ## Antes de publicar (obrigatório)
 
-Abra **`lib/site.ts`** e procure por `TODO`:
+O WhatsApp que recebe as consultas já está configurado em `whatsapp` (`lib/site.ts`). Ainda em **`lib/site.ts`**, procure por `TODO`:
 
-- [ ] `whatsapp`: número real com DDI + DDD, só dígitos (ex.: `5511912345678`). Hoje está `5500000000000`.
 - [ ] `instagram` e `instagramHandle`: perfil oficial. Hoje estão `instagram.com/lorve` e `@lorve`, só de exemplo.
 - [ ] `url`: domínio definitivo (SEO, sitemap e prévia de links). Hoje está `https://lorve.com.br`, só de exemplo.
-- [ ] `priceMultiplier`: a lista vem com o preço do fornecedor. Use `1.3` para +30%, por exemplo. Todos os preços do site mudam juntos.
-- [ ] `priceNote` e `faq`: revise moeda, frete, pagamento e prazos conforme a política comercial.
+- [ ] `faq` e `steps`: revise frete, pagamento e prazos conforme a política comercial.
 
 Também dá para trocar ali os produtos do topo (`heroSlides`, `heroOrbs`) e da vitrine "Ícones da casa" (`featured`), sempre pelo código da lista.
 
-## Atualizando a lista de preços
+## Atualizando o catálogo
 
 Quando chegar um PDF novo do fornecedor:
 
@@ -56,7 +56,7 @@ pip install pymupdf pillow
 python scripts/extrair_catalogo.py caminho/para/LISTA.pdf
 ```
 
-O script lê cada linha da tabela (código, descrição, foto e preço), separa marca, nome, tamanho, concentração e gênero, recorta a foto de cada produto e regrava `lib/catalogo.json` e `public/produtos/*.webp`. Depois é só atualizar `listDate` em `lib/site.ts` e publicar de novo.
+O script lê cada linha da tabela (código, descrição e foto), separa marca, nome, tamanho, concentração e gênero, recorta a foto de cada produto e regrava `lib/catalogo.json` e `public/produtos/*.webp`. A coluna de preço é ignorada de propósito. Depois é só publicar de novo.
 
 Correções de digitação da lista e nomes reescritos à mão ficam nos dicionários `FIXES` e `OVERRIDES` no começo do script.
 
@@ -75,7 +75,7 @@ app/                  layout, página, SEO (sitemap, robots, ícone)
 components/           uma seção por arquivo (hero, vitrine, catálogo, sacola...)
 lib/site.ts           textos, contatos e configurações editáveis
 lib/catalogo.json     os 496 produtos (gerado pelo script)
-lib/catalog.ts        busca, filtros e formatação de preço
+lib/catalog.ts        busca, filtros e ordenação
 lib/store.ts          sacola, filtros e estado da interface
 scripts/              extração do catálogo a partir do PDF
 public/produtos/      fotos dos produtos (geradas pelo script)

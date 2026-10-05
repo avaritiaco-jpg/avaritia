@@ -13,7 +13,7 @@ import {
 } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { Drop } from "@phosphor-icons/react/dist/ssr";
-import { brands, formatPrice, getProduct, minPrice, products } from "@/lib/catalog";
+import { brands, getProduct, products } from "@/lib/catalog";
 import { site } from "@/lib/site";
 import { openQuickView, ui, useStore } from "@/lib/store";
 import { scrollToId } from "@/lib/scroll";
@@ -284,7 +284,7 @@ export function Hero() {
             transition={gentle(reduce, { duration: 0.8, ease: EASE_OUT })}
           >
             <Eyebrow>
-              Lista {site.listDate} · {products.length} fragrâncias
+              {products.length} fragrâncias · {brands.length} casas
             </Eyebrow>
           </motion.div>
 
@@ -304,7 +304,7 @@ export function Hero() {
             transition={gentle(reduce, { duration: 1, delay: 0.75, ease: EASE_OUT })}
           >
             Perfumaria árabe, nicho e importados: Lattafa, Armaf, Maison Alhambra, Afnan, Xerjoff e mais. Escolha
-            com calma, monte sua sacola e finalize pelo WhatsApp.
+            com calma, monte sua sacola e consulte os valores pelo WhatsApp.
           </motion.p>
 
           <motion.div
@@ -320,7 +320,7 @@ export function Hero() {
           </motion.div>
 
           <motion.dl
-            className="mt-14 grid max-w-md grid-cols-3 divide-x divide-line border-y border-line"
+            className="mt-14 grid max-w-xs grid-cols-2 divide-x divide-line border-y border-line"
             initial={{ opacity: 0 }}
             animate={play ? { opacity: 1 } : undefined}
             transition={gentle(reduce, { duration: 1.2, delay: 1.1, ease: EASE_OUT })}
@@ -328,7 +328,6 @@ export function Hero() {
             {[
               { v: String(products.length), l: "fragrâncias" },
               { v: String(brands.length), l: "casas" },
-              { v: formatPrice(minPrice), l: "a partir de" },
             ].map((s) => (
               <div key={s.l} className="flex flex-col-reverse gap-1 px-4 py-4 first:pl-0">
                 <dt className="text-[10px] uppercase tracking-[0.22em] text-faint">{s.l}</dt>

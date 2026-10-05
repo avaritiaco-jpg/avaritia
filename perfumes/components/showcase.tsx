@@ -10,7 +10,7 @@ import {
   type MotionValue,
 } from "motion/react";
 import { useEffect, useLayoutEffect, useRef, useState } from "react";
-import { formatPrice, finalPrice, getProduct, type Product } from "@/lib/catalog";
+import { getProduct, type Product } from "@/lib/catalog";
 import { site } from "@/lib/site";
 import { openQuickView } from "@/lib/store";
 import { useMedia } from "@/lib/use-media";
@@ -73,13 +73,10 @@ function IconCard({
               <h3 className="mt-2 font-display text-3xl font-light leading-tight text-ivory">{product.name}</h3>
               <p className="mt-3 line-clamp-2 text-sm leading-relaxed text-mute">{note}</p>
             </div>
-            <div className="flex items-end justify-between gap-4 border-t border-line pt-4">
-              <div>
-                <p className="text-[11px] text-faint">
-                  {[product.concentration, product.size].filter(Boolean).join(" · ")}
-                </p>
-                <p className="mt-1 font-display text-2xl text-ivory">{formatPrice(finalPrice(product))}</p>
-              </div>
+            <div className="flex items-center justify-between gap-4 border-t border-line pt-4">
+              <p className="text-sm text-mute">
+                {[product.concentration, product.size].filter(Boolean).join(" · ")}
+              </p>
               <AddButton product={product} sourceRef={imgRef} />
             </div>
           </div>
