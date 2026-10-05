@@ -1,0 +1,4 @@
+:HL["/avaritia/confeitaria/_next/static/chunks/3xbggc---_ify.css","style"]
+:HL["/avaritia/confeitaria/_next/static/media/4a7551bcc3548e67-s.p.3jc5sq-923m_s.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+:HL["/avaritia/confeitaria/_next/static/media/4c424024f2f05495-s.p.40u20f-0n6ewa.woff2","font",{"crossOrigin":"","type":"font/woff2"}]
+0:{"tree":{"name":"","param":null,"prefetchHints":4176,"slots":{"children":{"name":"pagamento","param":null,"prefetchHints":4192,"slots":{"children":{"name":"__PAGE__","param":null,"prefetchHints":4256,"slots":null}}}}},"staleTime":300,"buildId":"_oRfLv0zOZY3QdGOlaZfo"}
