@@ -1,0 +1,181 @@
+@import "tailwindcss";
+
+/*
+ * Âmbar: noite quente (preto-café) com acento âmbar e "pratos" de marfim para os frascos.
+ * Raios: cards 2rem com núcleo concêntrico, botões e chips em pílula.
+ */
+@theme {
+  --color-noir: #0c0907;
+  --color-noir-2: #13100c;
+  --color-noir-3: #1c1712;
+  --color-line: rgb(242 232 214 / 0.09);
+  --color-line-strong: rgb(242 232 214 / 0.16);
+  --color-ivory: #f3ece1;
+  --color-plate: #efe7da;
+  --color-mute: #ab9f8e;
+  --color-faint: #7a6f61;
+  --color-amber: #d6a35c;
+  --color-amber-soft: #ecc98f;
+  --color-amber-deep: #9a6a2c;
+  --color-ink: #1d1712;
+  --color-ink-mute: #6b5f50;
+
+  --font-display: var(--font-cormorant), "Cormorant Garamond", ui-serif, Georgia, serif;
+  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, sans-serif;
+  --font-mono: var(--font-geist-mono), ui-monospace, monospace;
+
+  /* Curvas fortes (as nativas são fracas demais para UI) */
+  --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
+  --ease-in-out: cubic-bezier(0.77, 0, 0.175, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
+
+  --animate-float: float 7s cubic-bezier(0.77, 0, 0.175, 1) infinite alternate;
+  --animate-spin-slow: spin-slow 28s linear infinite;
+  --animate-cue: cue 2.4s cubic-bezier(0.77, 0, 0.175, 1) infinite;
+
+  @keyframes float {
+    from {
+      transform: translate3d(0, -7px, 0);
+    }
+    to {
+      transform: translate3d(0, 7px, 0);
+    }
+  }
+
+  @keyframes spin-slow {
+    to {
+      transform: rotate(360deg);
+    }
+  }
+
+  @keyframes cue {
+    0% {
+      transform: translateY(-100%);
+    }
+    100% {
+      transform: translateY(220%);
+    }
+  }
+}
+
+@layer base {
+  :root {
+    color-scheme: dark;
+  }
+
+  html {
+    background: var(--color-noir);
+    color: var(--color-ivory);
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    text-rendering: optimizeLegibility;
+    -webkit-tap-highlight-color: transparent;
+  }
+
+  body {
+    background: var(--color-noir);
+    overflow-x: clip;
+  }
+
+  ::selection {
+    background: var(--color-amber);
+    color: var(--color-noir);
+  }
+
+  :focus-visible {
+    outline: 2px solid var(--color-amber);
+    outline-offset: 3px;
+    border-radius: 8px;
+  }
+
+  input[type="search"]::-webkit-search-cancel-button {
+    display: none;
+  }
+}
+
+@layer components {
+  /* Granulação: um único elemento fixo, sem custo de repaint no scroll */
+  .grain {
+    position: fixed;
+    inset: 0;
+    z-index: 80;
+    pointer-events: none;
+    opacity: 0.05;
+    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='160' height='160'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.8' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+  }
+
+  /* Prato de marfim com luz de estúdio: o fundo branco das fotos some (multiply) */
+  .plate {
+    background:
+      radial-gradient(120% 85% at 50% 30%, #fbf6ee 0%, #efe6d8 58%, #e2d5c1 100%);
+  }
+  .plate-img-cutout {
+    mix-blend-mode: multiply;
+  }
+
+  /* Brilho na cor do frasco (--tone vem do catálogo) */
+  .tone-glow {
+    background: radial-gradient(60% 55% at 50% 60%, var(--tone) 0%, transparent 70%);
+  }
+
+  .text-balance {
+    text-wrap: balance;
+  }
+
+  .mask-fade-x {
+    mask-image: linear-gradient(90deg, transparent, #000 10%, #000 90%, transparent);
+  }
+
+  .no-scrollbar {
+    scrollbar-width: none;
+  }
+  .no-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+
+  /* Abertura: escondida já no HTML quando a visita não deve vê-la */
+  html[data-intro="skip"] .intro {
+    display: none;
+  }
+
+  /* Ouro líquido para destaques de texto */
+  .text-gold {
+    background: linear-gradient(100deg, #b8823c 0%, #f1d39b 38%, #d6a35c 62%, #a8722f 100%);
+    -webkit-background-clip: text;
+    background-clip: text;
+    color: transparent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-float,
+  .animate-spin-slow,
+  .animate-cue {
+    animation: none;
+  }
+}
+
+/* Se o JavaScript falhar, a abertura some sozinha */
+@keyframes intro-failsafe {
+  to {
+    visibility: hidden;
+    opacity: 0;
+  }
+}
+
+/* Superfície do líquido nos frascos do guia */
+@keyframes wave {
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Barra de progresso do slide do topo */
+@keyframes slide-progress {
+  from {
+    transform: scaleX(0);
+  }
+  to {
+    transform: scaleX(1);
+  }
+}

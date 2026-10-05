@@ -1,4 +1,5 @@
 @import "tailwindcss";
+@source not "../perfumes";
 
 /*
  * Identidade Avaritia: tema escuro fixo (decisão de marca) com um único acento dourado.

@@ -57,3 +57,7 @@ public/         imagens do portfólio e og.jpg
 ```
 
 O formulário de contato não precisa de backend: ele valida os campos e abre o WhatsApp com a mensagem já preenchida.
+
+## Outros projetos neste repositório
+
+- **[`perfumes/`](perfumes/README.md)**: Âmbar Perfumaria, catálogo de 496 perfumes gerado a partir da lista de preços em PDF, com sacola e pedido pelo WhatsApp. É um projeto Next.js independente: rode os comandos de dentro da pasta `perfumes/`.
