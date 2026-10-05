@@ -41,17 +41,23 @@ export type Line = { code: string; qty: number };
 export const cart = createStore<Line[]>([]);
 const CART_KEY = "ambar:sacola";
 
+let cartLoaded = false;
+
 export function loadCart() {
+  if (cartLoaded) return;
+  cartLoaded = true;
   try {
     const raw = localStorage.getItem(CART_KEY);
-    if (!raw) return;
-    const lines = (JSON.parse(raw) as Line[]).filter(
-      (l) => getProduct(l.code) && Number.isInteger(l.qty) && l.qty > 0,
-    );
-    cart.set(lines);
+    if (raw) {
+      const lines = (JSON.parse(raw) as Line[]).filter(
+        (l) => getProduct(l.code) && Number.isInteger(l.qty) && l.qty > 0,
+      );
+      cart.set(lines);
+    }
   } catch {
-    // armazenamento indisponível (aba anônima, bloqueio): segue com a sacola vazia
+    // armazenamento indisponível (aba anônima, bloqueio): segue com a sacola só em memória
   }
+  // a gravação precisa ser registrada mesmo quando ainda não havia sacola salva
   cart.subscribe(() => {
     try {
       localStorage.setItem(CART_KEY, JSON.stringify(cart.get()));

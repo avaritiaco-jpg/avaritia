@@ -404,10 +404,14 @@ export function QuickView() {
       synced.current = true;
       if (!code) return;
     }
-    const url = new URL(window.location.href);
-    if (code) url.searchParams.set("p", code);
-    else url.searchParams.delete("p");
-    window.history.replaceState(window.history.state, "", url);
+    try {
+      const url = new URL(window.location.href);
+      if (code) url.searchParams.set("p", code);
+      else url.searchParams.delete("p");
+      window.history.replaceState(window.history.state, "", url);
+    } catch {
+      // alguns navegadores embutidos e iframes isolados não deixam mexer na URL: o modal segue funcionando
+    }
   }, [code]);
 
   return <AnimatePresence>{code ? <Dialog key="quick-view" code={code} /> : null}</AnimatePresence>;
