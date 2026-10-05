@@ -214,9 +214,11 @@ export function Nav() {
               >
                 <WhatsappLogo size={20} weight="light" /> Falar no WhatsApp
               </a>
-              <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
-                <InstagramLogo size={20} weight="light" /> {site.instagramHandle}
-              </a>
+              {site.instagram ? (
+                <a href={site.instagram} target="_blank" rel="noopener noreferrer" className="flex items-center gap-3">
+                  <InstagramLogo size={20} weight="light" /> {site.instagramHandle}
+                </a>
+              ) : null}
             </motion.div>
           </motion.div>
         )}

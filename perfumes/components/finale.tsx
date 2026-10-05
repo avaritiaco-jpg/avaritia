@@ -160,16 +160,18 @@ export function Footer() {
                 <WhatsappLogo size={17} weight="light" /> WhatsApp
               </a>
             </li>
-            <li>
-              <a
-                href={site.instagram}
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 transition-colors duration-200 ease-out hover:text-ivory"
-              >
-                <InstagramLogo size={17} weight="light" /> {site.instagramHandle}
-              </a>
-            </li>
+            {site.instagram ? (
+              <li>
+                <a
+                  href={site.instagram}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                  className="inline-flex items-center gap-2 transition-colors duration-200 ease-out hover:text-ivory"
+                >
+                  <InstagramLogo size={17} weight="light" /> {site.instagramHandle}
+                </a>
+              </li>
+            ) : null}
             <li className="text-xs text-faint">
               Valores e disponibilidade sob consulta no WhatsApp.
             </li>

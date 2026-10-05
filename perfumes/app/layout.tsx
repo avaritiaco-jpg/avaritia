@@ -60,7 +60,7 @@ const jsonLd = {
   name: site.fullName,
   description: site.description,
   url: site.url,
-  sameAs: [site.instagram],
+  sameAs: site.instagram ? [site.instagram] : undefined,
 };
 
 // A abertura aparece uma vez por sessão e nunca com "reduzir movimento".

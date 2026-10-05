@@ -41,8 +41,8 @@ npm start        # serve a pasta ./out
 
 O WhatsApp que recebe as consultas já está configurado em `whatsapp` (`lib/site.ts`). Ainda em **`lib/site.ts`**, procure por `TODO`:
 
-- [ ] `instagram` e `instagramHandle`: perfil oficial. Hoje estão `instagram.com/lorve` e `@lorve`, só de exemplo.
-- [ ] `url`: domínio definitivo (SEO, sitemap e prévia de links). Hoje está `https://lorve.com.br`, só de exemplo.
+- [ ] `instagram` e `instagramHandle`: perfil oficial (ex.: `https://instagram.com/seuperfil` e `@seuperfil`). Enquanto estiverem vazios, o link do Instagram não aparece no site.
+- [ ] Endereço do site (SEO, sitemap e prévia de links): na Vercel e na Netlify ele vem do próprio deploy. Com domínio próprio, defina a variável `NEXT_PUBLIC_SITE_URL` (ex.: `https://www.seudominio.com.br`) no painel da hospedagem.
 - [ ] `faq` e `steps`: revise frete, pagamento e prazos conforme a política comercial.
 
 Também dá para trocar ali os produtos do topo (`heroSlides`, `heroOrbs`) e da vitrine "Ícones da casa" (`featured`), sempre pelo código da lista.
@@ -64,7 +64,7 @@ Correções de digitação da lista e nomes reescritos à mão ficam nos dicion�
 
 O build gera HTML estático em `out/`, então funciona em qualquer hospedagem:
 
-- **Vercel** (recomendado): importe o repositório em [vercel.com/new](https://vercel.com/new) e defina **Root Directory = `perfumes`**.
+- **Vercel** (recomendado): em [vercel.com/new](https://vercel.com/new), importe o repositório, defina **Root Directory = `perfumes`** e clique em Deploy. O endereço (`*.vercel.app`) sai em cerca de um minuto; o domínio próprio se conecta depois em Settings → Domains.
 - **Netlify**: base directory `perfumes`, comando `npm run build`, pasta de publicação `perfumes/out`.
 - **Hostinger, Locaweb ou cPanel**: rode `npm run build` e envie o conteúdo de `out/` para `public_html`.
 

@@ -1,5 +1,14 @@
 // Todo o conteúdo editável do site fica aqui. Procure por TODO antes de publicar.
 
+// Endereço público do site (SEO, sitemap e prévia de links). Na Vercel e na Netlify ele vem do próprio
+// deploy; com domínio próprio, defina NEXT_PUBLIC_SITE_URL no painel da hospedagem.
+const siteUrl = (
+  process.env.NEXT_PUBLIC_SITE_URL ||
+  (process.env.VERCEL_PROJECT_PRODUCTION_URL ? `https://${process.env.VERCEL_PROJECT_PRODUCTION_URL}` : "") ||
+  (process.env.NETLIFY === "true" && process.env.URL ? process.env.URL : "") ||
+  "https://lorve.com.br"
+).replace(/\/$/, "");
+
 export const site = {
   name: "Lorvè",
   fullName: "Lorvè",
@@ -7,13 +16,13 @@ export const site = {
   title: "Lorvè · Perfumes árabes, nicho e importados",
   description:
     "Mais de 490 fragrâncias de Lattafa, Armaf, Maison Alhambra, Afnan, Xerjoff e outras casas. Monte sua sacola e consulte valores e disponibilidade pelo WhatsApp.",
-  // TODO: domínio definitivo (SEO, sitemap e prévia de links)
-  url: "https://lorve.com.br",
+  url: siteUrl,
   // WhatsApp que recebe as consultas: DDI + DDD + número, só dígitos
   whatsapp: "5522999225146",
-  // TODO: perfil oficial
-  instagram: "https://instagram.com/lorve",
-  instagramHandle: "@lorve",
+  // TODO: perfil oficial do Instagram (ex.: "https://instagram.com/seuperfil" e "@seuperfil").
+  // Enquanto estiver vazio, o link some do site.
+  instagram: "" as string,
+  instagramHandle: "" as string,
 
   nav: [
     { label: "Ícones", href: "#icones" },
