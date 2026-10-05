@@ -8,7 +8,7 @@ import { site } from "@/lib/site";
 export const metadata: Metadata = {
   title: `Finalizar encomenda · ${site.fullName}`,
   description: "Confira o pedido, escolha a data de retirada e pague o sinal por Pix, PicPay ou dinheiro.",
-  alternates: { canonical: "/pagamento/" },
+  alternates: { canonical: `${site.url}/pagamento/` },
   robots: { index: false, follow: true },
 };
 

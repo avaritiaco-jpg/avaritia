@@ -40,7 +40,7 @@ import {
   type Method,
   type Order,
 } from "@/lib/order";
-import { site } from "@/lib/site";
+import { site, withBase } from "@/lib/site";
 import { cart, clearCart, openDrawer, selectTotal, useStore, type CartLine } from "@/lib/store";
 import { Art } from "./art";
 import { PickupCalendar } from "./calendar";
@@ -789,7 +789,7 @@ function Confirmation({
             Editar pedido
           </PillButton>
         )}
-        <a href="/#cardapio" className="inline-flex items-center gap-2 rounded-full px-4 py-3 text-[15px] font-semibold text-cocoa-2 hover:text-cocoa">
+        <a href={withBase("/#cardapio")} className="inline-flex items-center gap-2 rounded-full px-4 py-3 text-[15px] font-semibold text-cocoa-2 hover:text-cocoa">
           <ArrowLeft size={16} weight="bold" /> Voltar ao cardápio
         </a>
       </div>
@@ -825,7 +825,7 @@ function Empty() {
       <p className="mt-3 max-w-[36ch] text-lg font-medium text-cocoa-2">
         Escolha um bolo ou docinhos no cardápio e volte aqui para finalizar.
       </p>
-      <PillButton href="/#cardapio" className="mt-8">
+      <PillButton href={withBase("/#cardapio")} className="mt-8">
         Ver o cardápio
       </PillButton>
     </div>

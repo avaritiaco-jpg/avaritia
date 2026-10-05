@@ -6,7 +6,7 @@ import { usePathname } from "next/navigation";
 import { Basket, Trash } from "@phosphor-icons/react/dist/ssr";
 import { money, plural } from "@/lib/format";
 import { DOCE_STEP, isUnits, lineArt, lineDetail, lineTitle, lineTotal } from "@/lib/menu";
-import { site } from "@/lib/site";
+import { site, withBase } from "@/lib/site";
 import {
   cart,
   clearCart,
@@ -118,13 +118,13 @@ export function CartDrawer() {
                 Continuar para o pagamento
               </PillButton>
             ) : (
-              <PillButton href="/pagamento/" className="w-full" variant="rose">
+              <PillButton href={withBase("/pagamento/")} className="w-full" variant="rose">
                 Finalizar pedido
               </PillButton>
             )}
             <div className="flex items-center justify-center gap-4 text-[13px] font-semibold text-mute">
               {onCheckout ? (
-                <a href="/#cardapio" className="transition-colors hover:text-cocoa">
+                <a href={withBase("/#cardapio")} className="transition-colors hover:text-cocoa">
                   Adicionar mais itens
                 </a>
               ) : (
@@ -151,7 +151,7 @@ export function CartDrawer() {
             Escolha um bolo ou uns docinhos no cardápio. Eles aparecem aqui, prontos para o pedido.
           </p>
           {onCheckout ? (
-            <PillButton variant="ghost" href="/#cardapio">
+            <PillButton variant="ghost" href={withBase("/#cardapio")}>
               Ver o cardápio
             </PillButton>
           ) : (

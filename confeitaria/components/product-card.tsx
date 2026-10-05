@@ -4,6 +4,7 @@ import { useRef } from "react";
 import { Plus } from "@phosphor-icons/react/dist/ssr";
 import { money } from "@/lib/format";
 import { defaultSelection, fromPrice, gelado, productArt, type Product } from "@/lib/menu";
+import { withBase } from "@/lib/site";
 import { openSheet, origin } from "@/lib/store";
 import { Art } from "./art";
 
@@ -64,7 +65,7 @@ export function ProductCard({ product }: { product: Product }) {
         {product.photo ? (
           // eslint-disable-next-line @next/next/no-img-element
           <img
-            src={product.photo}
+            src={withBase(product.photo)}
             alt={product.name}
             loading="lazy"
             decoding="async"

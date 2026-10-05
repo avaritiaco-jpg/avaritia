@@ -1,0 +1,51 @@
+# Publica o site da Cianinha Confeitaria no GitHub Pages:
+# https://<usuário>.github.io/<repositório>/confeitaria/
+# Roda a cada mudança em confeitaria/ no branch principal, ou à mão em Actions → "Publica a confeitaria".
+name: Publica a confeitaria
+
+on:
+  push:
+    branches: [claude/relaxed-cori-ve40ct]
+    paths: ["confeitaria/**", ".github/workflows/confeitaria-pages.yml"]
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+concurrency:
+  group: confeitaria-pages
+  cancel-in-progress: true
+
+jobs:
+  publicar:
+    runs-on: ubuntu-latest
+    defaults:
+      run:
+        working-directory: confeitaria
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version: 22
+          cache: npm
+          cache-dependency-path: confeitaria/package-lock.json
+
+      - run: npm ci
+
+      - name: Gera o site estático
+        run: npm run build
+        env:
+          NEXT_PUBLIC_BASE_PATH: /${{ github.event.repository.name }}/confeitaria
+          NEXT_PUBLIC_SITE_URL: https://${{ github.repository_owner }}.github.io/${{ github.event.repository.name }}/confeitaria
+
+      # Copia o site para a pasta confeitaria/ do branch gh-pages, sem mexer no resto do branch
+      - name: Publica no branch gh-pages
+        uses: peaceiris/actions-gh-pages@v4
+        with:
+          github_token: ${{ secrets.GITHUB_TOKEN }}
+          publish_branch: gh-pages
+          publish_dir: ./confeitaria/out
+          destination_dir: confeitaria
+          keep_files: true
+          commit_message: "Publica a confeitaria"

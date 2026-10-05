@@ -79,7 +79,11 @@ As regras de encomenda (2 dias de antecedência, terça a sábado, sinal de 50%)
 
 ## Publicando
 
-O build gera HTML estático em `out/`, então funciona em qualquer hospedagem:
+O site já está no ar pelo **GitHub Pages**: https://avaritiaco-jpg.github.io/avaritia/confeitaria/
+
+A cada mudança em `confeitaria/` no branch principal, o workflow `.github/workflows/confeitaria-pages.yml` gera o site de novo e atualiza a pasta `confeitaria/` do branch `gh-pages` (leva uns 2 minutos). Para publicar à mão: aba **Actions** → *Publica a confeitaria* → *Run workflow*. No GitHub Pages o site fica numa subpasta, por isso o build usa `NEXT_PUBLIC_BASE_PATH`.
+
+Para usar um domínio próprio ou outra hospedagem, o build gera HTML estático em `out/` e funciona em qualquer lugar:
 
 - **Vercel** (recomendado): em [vercel.com/new](https://vercel.com/new), importe o repositório, defina **Root Directory = `confeitaria`** e clique em Deploy. O domínio próprio se conecta depois em Settings → Domains.
 - **Netlify**: base directory `confeitaria`, comando `npm run build`, pasta de publicação `confeitaria/out`.

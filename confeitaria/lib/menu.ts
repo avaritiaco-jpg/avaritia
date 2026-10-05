@@ -809,7 +809,7 @@ export function productArt(p: Product, sel: Selection): Art {
       return p.art(sel);
     case "doce": {
       const flavor = p.flavors.find((f) => f.id === sel.flavor) ?? p.flavors[0];
-      return withBase(p, flavor.art, sel.base);
+      return withCasca(p, flavor.art, sel.base);
     }
   }
 }
@@ -824,7 +824,7 @@ const cups: Record<string, string> = {
 };
 
 /** Desenho do docinho com a forminha da linha (e a casca escolhida, nas trufas) */
-export function withBase(p: DoceProduct, art: BonbonArt, base?: string): BonbonArt {
+export function withCasca(p: DoceProduct, art: BonbonArt, base?: string): BonbonArt {
   return { ...art, cup: art.cup ?? cups[p.id], ...(p.id === "trufas" && base === "branco" ? { body: C.trufaBranca } : {}) };
 }
 

@@ -9,6 +9,12 @@ const siteUrl = (
   "https://cianinhaconfeitaria.com.br"
 ).replace(/\/$/, "");
 
+// Subpasta onde o site é servido (ex.: "/avaritia/confeitaria" no GitHub Pages). Vazio na raiz do domínio.
+export const basePath = (process.env.NEXT_PUBLIC_BASE_PATH ?? "").replace(/\/$/, "");
+
+/** Caminho interno com a subpasta do site: withBase("/pagamento/") */
+export const withBase = (path: string) => `${basePath}${path}`;
+
 export const site = {
   name: "Cianinha",
   fullName: "Cianinha Confeitaria",

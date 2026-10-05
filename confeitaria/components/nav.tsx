@@ -3,7 +3,7 @@
 import { AnimatePresence, motion, useAnimate, useMotionValueEvent, useScroll } from "motion/react";
 import { useEffect, useRef, useState } from "react";
 import { ArrowLeft, Basket, InstagramLogo, WhatsappLogo } from "@phosphor-icons/react/dist/ssr";
-import { site, whatsappLink } from "@/lib/site";
+import { site, whatsappLink, withBase } from "@/lib/site";
 import { cart, openDrawer, selectCount, setNavHidden, ui, useStore } from "@/lib/store";
 import { lockScroll, scrollToId } from "@/lib/scroll";
 import { EASE_DRAWER, EASE_OUT } from "./ui";
@@ -113,7 +113,7 @@ export function Nav({ home = true }: { home?: boolean }) {
     // espera o menu começar a fechar antes de rolar
     setTimeout(() => scrollToId(href.slice(1)), open ? 250 : 0);
   };
-  const link = (href: string) => (home ? href : `/${href}`);
+  const link = (href: string) => (home ? href : withBase(`/${href}`));
 
   return (
     <>
@@ -126,7 +126,7 @@ export function Nav({ home = true }: { home?: boolean }) {
           aria-label="Principal"
           className="flex w-full max-w-6xl items-center justify-between gap-2 rounded-full bg-card/80 py-1.5 pl-5 pr-1.5 shadow-[0_12px_40px_-24px_rgba(61,39,32,0.45)] ring-1 ring-line backdrop-blur-xl"
         >
-          <a href={home ? "#topo" : "/"} onClick={go("#topo")} aria-label={`${site.fullName}, início`} className="shrink-0">
+          <a href={home ? "#topo" : withBase("/")} onClick={go("#topo")} aria-label={`${site.fullName}, início`} className="shrink-0">
             <Logo />
           </a>
 
@@ -146,7 +146,7 @@ export function Nav({ home = true }: { home?: boolean }) {
             </ul>
           ) : (
             <a
-              href="/#cardapio"
+              href={withBase("/#cardapio")}
               className="hidden items-center gap-2 rounded-full px-4 py-2 text-[14px] font-semibold text-cocoa-2 transition-colors hover:bg-blush-2 md:flex"
             >
               <ArrowLeft size={16} weight="bold" /> Voltar ao cardápio

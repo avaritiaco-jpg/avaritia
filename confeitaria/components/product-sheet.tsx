@@ -16,7 +16,7 @@ import {
   lowerFirst,
   productArt,
   shapeLabel,
-  withBase,
+  withCasca,
   type CakeProduct,
   type CaseiroProduct,
   type DoceProduct,
@@ -25,6 +25,7 @@ import {
   type Selection,
 } from "@/lib/menu";
 import { addToCart, closeSheet, launchFlight, origin, ui, useStore } from "@/lib/store";
+import { withBase } from "@/lib/site";
 import { useMedia } from "@/lib/use-media";
 import { Art } from "./art";
 import { Options, Stepper } from "./controls";
@@ -208,7 +209,7 @@ function DoceOptions({ p, d, set }: { p: DoceProduct; d: Draft; set: (d: Partial
                 }`}
               >
                 <span className="plate size-12 shrink-0 rounded-[0.8rem] p-1">
-                  <Art art={withBase(p, f.art, d.sel.base)} />
+                  <Art art={withCasca(p, f.art, d.sel.base)} />
                 </span>
                 <span className="min-w-0 flex-1">
                   <span className="block text-[14px] font-bold leading-tight text-cocoa">{f.label}</span>
@@ -342,7 +343,7 @@ function SheetArt({ product: p, d }: { product: Product; d: Draft }) {
   if (p.photo)
     return (
       // eslint-disable-next-line @next/next/no-img-element
-      <img src={p.photo} alt={p.name} className="absolute inset-0 h-full w-full object-cover" />
+      <img src={withBase(p.photo)} alt={p.name} className="absolute inset-0 h-full w-full object-cover" />
     );
 
   return (
