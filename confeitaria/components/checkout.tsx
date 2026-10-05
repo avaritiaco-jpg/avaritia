@@ -282,7 +282,7 @@ function Summary({
         Confirmar encomenda
       </PillButton>
       <p className="mt-3 text-center text-[13px] font-medium leading-relaxed text-mute">
-        Na próxima tela você paga o sinal e envia o pedido pelo WhatsApp.
+        Na próxima tela você envia o pedido pelo WhatsApp e vê como pagar o sinal.
       </p>
     </div>
   );
