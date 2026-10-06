@@ -1,9 +1,9 @@
 @import "tailwindcss";
 
 /*
- * Brigadeiria & Algo Mais: leite rosado, cacau escuro e um único acento framboesa.
- * Os tokens mudam sozinhos no modo escuro do sistema (a loja vira "chocolate amargo").
- * Raios: cards 2rem, botões, chips e campos em pílula.
+ * Brigadeiria e Algo Mais: as cores do logo da vitrine. Vinho do anel e das letras, creme do fundo
+ * e o dourado das bases onde os doces são servidos. Modo escuro vira "vinho e chocolate".
+ * Raios: fotos 1.5rem, botões e etiquetas em pílula.
  */
 @theme {
   --color-bg: var(--bg);
@@ -13,15 +13,18 @@
   --color-ink-2: var(--ink-2);
   --color-mute: var(--mute);
   --color-line: var(--line);
-  --color-accent: var(--accent);
-  --color-accent-ink: var(--accent-ink);
-  --color-accent-soft: var(--accent-soft);
-  --color-cocoa: #2a140e;
-  --color-cocoa-2: #3a1d14;
-  --color-cream: #fbeee9;
-  --color-gold: #d8b04c;
+  --color-wine: var(--wine);
+  --color-wine-ink: var(--wine-ink);
+  --color-wine-soft: var(--wine-soft);
+  --color-gold: var(--gold);
+  --color-alert: var(--alert);
+  --color-alert-soft: var(--alert-soft);
+  --color-ok: var(--ok);
+  --color-ok-soft: var(--ok-soft);
 
-  --font-display: var(--font-bricolage), ui-sans-serif, system-ui, sans-serif;
+  --font-display: var(--font-cormorant), "Cormorant Garamond", Georgia, serif;
+  --font-caps: var(--font-cinzel), "Cinzel", Georgia, serif;
+  --font-script: var(--font-vibes), "Great Vibes", cursive;
   --font-sans: var(--font-figtree), ui-sans-serif, system-ui, sans-serif;
 
   --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
@@ -30,31 +33,41 @@
 
 :root {
   color-scheme: light dark;
-  --bg: #fcf2f0;
-  --bg-2: #f7e4e1;
-  --surface: #fffaf9;
-  --ink: #2b1712;
-  --ink-2: #4d2c22;
-  --mute: #78564b;
-  --line: rgb(43 23 18 / 0.12);
-  --accent: #c02c58;
-  --accent-ink: #fff7f8;
-  --accent-soft: #f6cfd9;
-  --shadow-ink: #5a2a1d;
+  --bg: #fffaf6;
+  --bg-2: #f8ede6;
+  --surface: #ffffff;
+  --ink: #2c1513;
+  --ink-2: #4e2c27;
+  --mute: #7d5d56;
+  --line: rgb(44 21 19 / 0.12);
+  --wine: #7b1f2a;
+  --wine-ink: #fff6f3;
+  --wine-soft: #f3dcdc;
+  --gold: #b88a2e;
+  --alert: #8a4b00;
+  --alert-soft: #fbecd2;
+  --ok: #2f6b45;
+  --ok-soft: #dcefe2;
+  --shadow-ink: #5a1f1a;
 }
 
 @media (prefers-color-scheme: dark) {
   :root {
-    --bg: #1a0f0b;
-    --bg-2: #22140f;
-    --surface: #2a1913;
-    --ink: #f8e8e3;
-    --ink-2: #e8cfc7;
-    --mute: #c3a297;
-    --line: rgb(248 232 227 / 0.12);
-    --accent: #ff7096;
-    --accent-ink: #2a0b14;
-    --accent-soft: #4a1d2a;
+    --bg: #1b0f0e;
+    --bg-2: #241413;
+    --surface: #2b1817;
+    --ink: #f8ebe6;
+    --ink-2: #e8d2cb;
+    --mute: #c2a39b;
+    --line: rgb(248 235 230 / 0.12);
+    --wine: #e7909a;
+    --wine-ink: #2a0b10;
+    --wine-soft: #4a1e24;
+    --gold: #e0b964;
+    --alert: #f3c27a;
+    --alert-soft: #3f2a10;
+    --ok: #8fd3a6;
+    --ok-soft: #173424;
     --shadow-ink: #000000;
   }
 }
@@ -74,12 +87,12 @@
   }
 
   ::selection {
-    background: var(--accent);
-    color: var(--accent-ink);
+    background: var(--wine);
+    color: var(--wine-ink);
   }
 
   :focus-visible {
-    outline: 2px solid var(--accent);
+    outline: 2px solid var(--wine);
     outline-offset: 3px;
     border-radius: 12px;
   }

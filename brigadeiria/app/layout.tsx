@@ -1,15 +1,19 @@
 import type { Metadata, Viewport } from "next";
-import { Bricolage_Grotesque, Figtree } from "next/font/google";
+import { Cinzel, Cormorant_Garamond, Figtree, Great_Vibes } from "next/font/google";
 import { Providers } from "@/components/providers";
 import { site } from "@/lib/site";
 import "./globals.css";
 
-const bricolage = Bricolage_Grotesque({
+// As letras do logo: maiúsculas romanas em "BRIGADEIRIA" e cursiva em "e algo mais"
+const cormorant = Cormorant_Garamond({
   subsets: ["latin"],
-  variable: "--font-bricolage",
-  axes: ["opsz", "wdth"],
+  weight: ["500", "600", "700"],
+  style: ["normal", "italic"],
+  variable: "--font-cormorant",
   display: "swap",
 });
+const cinzel = Cinzel({ subsets: ["latin"], weight: ["500", "600"], variable: "--font-cinzel", display: "swap" });
+const vibes = Great_Vibes({ subsets: ["latin"], weight: "400", variable: "--font-vibes", display: "swap" });
 const figtree = Figtree({ subsets: ["latin"], variable: "--font-figtree", display: "swap" });
 
 export const metadata: Metadata = {
@@ -17,14 +21,15 @@ export const metadata: Metadata = {
   title: site.title,
   description: site.description,
   keywords: [
-    "brigadeiro",
-    "brigadeiro gourmet",
-    "chocolate belga",
-    "brigaderia",
-    "doceria",
-    "café",
+    "confeitaria",
+    "entremet",
+    "macarons",
+    "torre de macarons",
+    "bolo espatulado",
+    "docinhos finos",
+    "Pelinca",
     "Campos dos Goytacazes",
-    "Brigadeiria & Algo Mais",
+    "Brigadeiria e Algo Mais",
   ],
   alternates: { canonical: `${site.url}/` },
   openGraph: {
@@ -40,8 +45,8 @@ export const metadata: Metadata = {
 
 export const viewport: Viewport = {
   themeColor: [
-    { media: "(prefers-color-scheme: light)", color: "#fcf2f0" },
-    { media: "(prefers-color-scheme: dark)", color: "#1a0f0b" },
+    { media: "(prefers-color-scheme: light)", color: "#fffaf6" },
+    { media: "(prefers-color-scheme: dark)", color: "#1b0f0e" },
   ],
 };
 
@@ -52,27 +57,14 @@ const jsonLd = {
   description: site.description,
   url: site.url,
   telephone: `+${site.phone}`,
-  sameAs: [site.instagram],
-  servesCuisine: ["Doces", "Café"],
-  foundingDate: String(site.since),
-  address: {
-    "@type": "PostalAddress",
-    streetAddress: site.address.street,
-    addressLocality: site.address.city,
-    addressRegion: site.address.state,
-    addressCountry: "BR",
-  },
-  openingHoursSpecification: {
-    "@type": "OpeningHoursSpecification",
-    dayOfWeek: ["Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday"],
-    opens: "10:30",
-    closes: "19:30",
-  },
+  sameAs: [site.instagram, site.facebook],
+  servesCuisine: ["Confeitaria"],
+  foundingDate: "2015-07",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
-    <html lang="pt-BR" className={`${bricolage.variable} ${figtree.variable}`} suppressHydrationWarning>
+    <html lang="pt-BR" className={`${cormorant.variable} ${cinzel.variable} ${vibes.variable} ${figtree.variable}`} suppressHydrationWarning>
       <body className="font-sans">
         <script type="application/ld+json" dangerouslySetInnerHTML={{ __html: JSON.stringify(jsonLd) }} />
         <Providers>{children}</Providers>

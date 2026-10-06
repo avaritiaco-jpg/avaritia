@@ -1,12 +1,10 @@
-import { AlgoMais } from "@/components/algo-mais";
-import { BoxBuilder } from "@/components/box-builder";
-import { Finale } from "@/components/finale";
+import { Avisos } from "@/components/avisos";
+import { Contato } from "@/components/contato";
+import { Doces } from "@/components/doces";
+import { Encomendas } from "@/components/encomendas";
+import { Galeria } from "@/components/galeria";
 import { Hero } from "@/components/hero";
-import { Marquee } from "@/components/marquee";
 import { Nav } from "@/components/nav";
-import { Processo } from "@/components/processo";
-import { Visite } from "@/components/visite";
-import { Vitrine } from "@/components/vitrine";
 
 export default function Page() {
   return (
@@ -14,14 +12,12 @@ export default function Page() {
       <Nav />
       <main>
         <Hero />
-        <Marquee />
-        <Vitrine />
-        <BoxBuilder />
-        <Processo />
-        <AlgoMais />
-        <Visite />
+        <Avisos />
+        <Doces />
+        <Encomendas />
+        <Galeria />
+        <Contato />
       </main>
-      <Finale />
     </>
   );
 }

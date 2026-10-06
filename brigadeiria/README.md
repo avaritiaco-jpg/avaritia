@@ -1,46 +1,50 @@
-# Brigadeiria & Algo Mais
+# Brigadeiria e Algo Mais
 
-Site da **Brigadeiria & Algo Mais**, brigaderia e café no centro de Campos dos Goytacazes (RJ), aberta desde 2015. Tem mais de 40 sabores de brigadeiro feitos com chocolate belga, além de brownie, alfajor, pão de mel, bolos, tortas, café orgânico, cappuccino e chocolate quente.
+Site da **Brigadeiria e Algo Mais**, confeitaria fina em Campos dos Goytacazes (RJ), no Centro de Compras da Pelinca desde julho de 2015: entremets em forma de fruta, torres de macarons, bolos espatulados, tortas e docinhos finos.
 
-Os dados vieram dos perfis públicos da loja (Instagram [@brigadeiriaealgomais](https://instagram.com/brigadeiriaealgomais), Facebook e TripAdvisor): endereço, telefone, WhatsApp, horário, ano de abertura e linha de produtos.
+A loja está passando por **mudanças de cardápio, estrutura e localização**. O site existe principalmente para deixar isso claro para o cliente e levar todo pedido e toda dúvida para o WhatsApp.
+
+Fonte do conteúdo: perfil público do Instagram [@brigadeiriaealgomais](https://www.instagram.com/brigadeiriaealgomais/) (bio, destaques, post fixado e fotos). Nada de cardápio, preço ou horário foi inventado.
 
 ## O que tem no site
 
-- **Topo**: o brigadeiro do centro troca de sabor sozinho, caindo com efeito de "squash & stretch". Ele gira seguindo o mouse (o granulado se mexe e o brilho fica parado) e, quando clicado, espirra granulado e mostra o próximo sabor. Os brigadeiros em volta flutuam em profundidades diferentes e um anel de texto gira atrás.
-- **Faixa de sabores**: corre sozinha e acelera ou inverte com a velocidade da rolagem.
-- **Vitrine** (`#sabores`): no desktop a seção fica presa na tela e a rolagem vertical empurra a prateleira para o lado. Os brigadeiros **rolam de verdade**, girando na proporção do caminho andado. No celular vira uma faixa com rolagem lateral nativa. O botão "+ caixa" separa o sabor para a caixa.
-- **Monte sua caixa** (`#caixa`): a pessoa escolhe o tamanho (4, 6, 9 ou 12) e toca nos sabores. Cada brigadeiro voa em arco até a próxima casinha. Quando a caixa enche, a tampa fecha, a fita se amarra e o botão envia pelo WhatsApp a lista pronta ("2x Pistache, 1x Morango..."). No celular, um resumo fixo embaixo mostra quantos já entraram.
-- **Do tacho à forminha**: o único bloco cor de chocolate, com bordas de chocolate derretido. A seção fica presa enquanto a rolagem passa pelas quatro etapas (barra de chocolate belga, tacho mexendo, bolinha sendo enrolada, chuva de granulado na forminha).
-- **E o "algo mais"?** (`#algo-mais`): mosaico com os outros doces e o café. Cada card inclina em 3D seguindo o mouse, com uma luz que acompanha o ponteiro.
-- **Passa aqui no centro** (`#visite`): endereço, horário com o aviso de **aberto agora / fechado agora** (no fuso de Brasília), telefone, Instagram, botão "Como chegar" e perguntas rápidas.
-- **Final**: "Bateu vontade?" com brigadeiros caindo e se amontoando sobre o rodapé.
+- **Faixa de aviso fixa no topo**: "Estamos em mudança", sempre visível, leva aos avisos.
+- **Topo**: três fotos reais em camadas que seguem o mouse em profundidades diferentes.
+- **O que você precisa saber agora** (`#avisos`): um card por assunto (endereço, cardápio, loja e atendimento, clientes de outras cidades, contatos), cada um com uma etiqueta de status colorida pelo significado: âmbar = mudando, vinho = atenção, verde = continua igual. O card de endereço tem o endereço atual e o botão "Confirmar antes de ir", que abre o WhatsApp com a pergunta pronta.
+- **O que sai da nossa cozinha** (`#doces`): abas por categoria (entremets, macarons, bolos, tortas, docinhos finos, datas especiais) com as fotos reais. A foto cresce ao clicar e dá para navegar com as setas do teclado. Cada categoria tem um botão "Perguntar sobre..." com a mensagem pronta.
+- **Encomendas** (`#encomendas`): os três passos com uma linha que se desenha na rolagem.
+- **Instagram**: faixa de fotos que corre devagar e pausa com o mouse.
+- **Fale com a gente** (`#contato`): WhatsApp, telefone (com botão de copiar), Instagram, Facebook e o endereço atual com o aviso de mudança.
 
-Tudo funciona no **modo claro e no escuro** (segue o sistema) e respeita a opção **"reduzir movimento"**: nada se desloca, só aparece com um fade curto, e a vitrine e o processo viram blocos comuns.
+Funciona no modo claro e no escuro e respeita "reduzir movimento".
 
-### Ilustrações
+## Atualizando os avisos (o mais importante)
 
-Não existe nenhuma foto de terceiros no site. Os brigadeiros são desenhados pelo próprio código a partir de cada sabor (`components/brigadeiro.tsx`): massa, finalização (granulado, crocante, pó, coco, casquinha brûlée ou banhado), detalhe no topo e a forminha plissada. Os outros doces e o café estão em `components/treats.tsx`.
+Tudo fica em **`lib/site.ts`**, na lista `avisos`:
 
-Quando a loja tiver fotos próprias, elas podem entrar no lugar dos desenhos.
+- Quando a dona confirmar um detalhe (novo endereço, data da mudança, cardápio novo), escreva em `detalhe` do aviso correspondente. Ele aparece em destaque dentro do card.
+- Para mudar a etiqueta, edite `status` (texto) e `tom`: `"mudanca"` (âmbar), `"atencao"` (vinho) ou `"ok"` (verde).
+- Atualize `avisosAtualizadosEm` sempre que mexer.
+- Quando o endereço novo estiver valendo, troque `site.address` e o texto da faixa do topo em `components/nav.tsx`.
 
-## Antes de publicar (obrigatório)
+## Fotos
 
-Em **`lib/site.ts`**, procure por `TODO`:
+As fotos em `public/fotos/` foram **recortadas de prints do Instagram**, então estão em resolução baixa (cerca de 180 a 330 px). Para deixá-las nítidas, salve o arquivo original de cada post com **o mesmo nome** em `public/fotos/` e atualize `w` e `h` em `lib/fotos.ts`. A lista de fotos, o texto alternativo e a categoria de cada uma também ficam em `lib/fotos.ts`.
 
-- [ ] **WhatsApp**: as fontes públicas trazem `(22) 99966-6400`. Confirme o número, porque é para ele que vão os pedidos.
-- [ ] **Horário**: está "segunda a sábado, das 10h30 às 19h30". Uma das fontes dizia 11h às 20h. O aviso de "aberto agora" usa estes valores.
-- [ ] **Sabores**: os 12 da vitrine são sabores clássicos de brigaderia escolhidos para abrir o site (pistache e crème brûlée aparecem nas avaliações da loja). Troque pela lista real do balcão. Cada sabor tem as cores do desenho e o tipo de finalização.
-- [ ] **Tamanhos de caixa**: 4, 6, 9 e 12 unidades. Ajuste para os tamanhos que a loja vende.
-- [ ] **Endereço do site** (SEO e prévia de links): na Vercel e na Netlify ele vem do próprio deploy. Com domínio próprio, defina a variável `NEXT_PUBLIC_SITE_URL`.
+Fotos em que aparecem clientes ou a equipe não foram usadas.
 
-O site não mostra preços: o valor é confirmado pela equipe no WhatsApp.
+## Antes de publicar
+
+- [ ] Preencher os avisos com o que a dona confirmar (endereço novo, cardápio, horário).
+- [ ] Confirmar o WhatsApp: a bio traz "22 9996-66400", lido como **(22) 99966-6400**.
+- [ ] Trocar as fotos pelos originais em alta resolução.
+- [ ] Endereço do site (SEO): defina `NEXT_PUBLIC_SITE_URL` com o domínio próprio, se houver.
 
 ## Stack
 
 - [Next.js 16](https://nextjs.org) (App Router) com exportação estática (`out/`)
-- [Tailwind CSS v4](https://tailwindcss.com)
-- [Motion](https://motion.dev) nas animações e [Lenis](https://lenis.darkroom.engineering) na rolagem suave
-- Bricolage Grotesque (títulos), Figtree (texto) e [Phosphor](https://phosphoricons.com) (ícones)
+- [Tailwind CSS v4](https://tailwindcss.com), [Motion](https://motion.dev) e [Lenis](https://lenis.darkroom.engineering)
+- Cinzel e Great Vibes (as letras do logo), Cormorant Garamond (títulos), Figtree (texto), [Phosphor](https://phosphoricons.com) (ícones)
 
 ## Rodando localmente
 
@@ -49,20 +53,6 @@ cd brigadeiria
 npm install
 npm run dev      # http://localhost:3000
 npm run build    # gera o site estático em ./out
-npm start        # serve a pasta ./out
 ```
 
-## Publicando
-
-O build gera HTML estático em `out/`, então funciona em qualquer hospedagem (Vercel, Netlify, Hostinger, cPanel). No GitHub Pages, o workflow **"Publica a brigadeiria"** (`.github/workflows/brigadeiria-pages.yml`) publica em `https://<usuário>.github.io/<repositório>/brigadeiria/` a cada mudança no branch principal, ou à mão em Actions.
-
-## Estrutura
-
-```
-app/                    layout, página, SEO (sitemap, robots, ícone)
-components/brigadeiro   o desenho de cada brigadeiro
-components/treats       brownie, alfajor, pão de mel, bolo, café, torta e presente
-components/             uma seção por arquivo (hero, vitrine, caixa, processo...)
-lib/site.ts             todo o conteúdo editável
-lib/box.ts              a caixa montada (compartilhada entre vitrine e "Monte sua caixa")
-```
+No GitHub Pages, o workflow **"Publica a brigadeiria"** publica em `https://<usuário>.github.io/<repositório>/brigadeiria/`.

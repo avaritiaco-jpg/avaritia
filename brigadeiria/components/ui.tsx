@@ -56,7 +56,7 @@ export function WhatsButton({ text, label = "Pedir no WhatsApp", className = "" 
         href={waLink(text)}
         target="_blank"
         rel="noopener noreferrer"
-        className={`${pill} bg-accent text-accent-ink shadow-[0_14px_34px_-14px_var(--accent)] hover:shadow-[0_18px_40px_-12px_var(--accent)] ${className}`}
+        className={`${pill} bg-wine text-wine-ink shadow-[0_14px_34px_-16px_var(--wine)] hover:shadow-[0_18px_40px_-14px_var(--wine)] ${className}`}
       >
         {/* brilho que atravessa o botão no hover */}
         <span
